@@ -1,0 +1,19 @@
+{
+  "name": "blocipedia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "export NODE_ENV=test&& jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkamath/blocipedia.git"
+  },
+  "author": "Nritya Kamath",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nkamath/blocipedia/issues"
+  },
+  "homepage": "https://github.com/nkamath/blocipedia#readme"
+}
