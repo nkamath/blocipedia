@@ -10,7 +10,8 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = {
   signUpForm(req, res, next) {
-    res.render("users/signup");
+    console.log("userController: Sign Up Form called");
+    res.render("users/sign-up");
   },
   signInForm(req, res, next) {
     res.render("users/sign-in");
@@ -21,7 +22,7 @@ module.exports = {
       password: req.body.password,
       passwordConfirmation: req.body.passwordConfirmation
     };
-
+console.log("userController: Create called");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       req.flash("error", errors.array({
@@ -29,11 +30,11 @@ module.exports = {
       }));
       return res.redirect(303, req.headers.referer)
     }
-
     userQueries.createUser(newUser, (err, user) => {
+      console.log("userController: createUser called");
       if (err) {
         req.flash("error", err);
-        res.redirect("/users/signup");
+        res.redirect("/users/sign-up");
       } else {
         passport.authenticate("local")(req, res, () => {
           const msg = {
@@ -42,6 +43,7 @@ module.exports = {
             subject: 'Welcome to Blocipedia!',
             text: 'Thank you for joining our community'
           };
+          console.log("userController: Sending Email to " + user.email);
           sgMail.send(msg);
           req.flash("notice", "You've successfully signed in, check your email for confirmation!");
           res.redirect("/");

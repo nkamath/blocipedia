@@ -4,9 +4,9 @@ const userController = require("../controllers/userController");
 const { check} = require('express-validator');
 
 
-router.get("/users/signup", userController.signUpForm);
+router.get("/users/sign-up", userController.signUpForm);
 
-router.post("/users/signup", 
+router.post("/users/sign-up", 
 [
     //username must be an email
     check('email').isEmail(),
