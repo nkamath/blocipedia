@@ -43,7 +43,7 @@ console.log("userController: Create called");
             subject: 'Welcome to Blocipedia!',
             text: 'Thank you for joining our community'
           };
-          console.log("userController: Sending Email to " + user.email);
+          console.log("userController: Sending Email to " + user.email + sgMail.SENDGRID_API_KEY);
           sgMail.send(msg);
           req.flash("notice", "You've successfully signed in, check your email for confirmation!");
           res.redirect("/");
