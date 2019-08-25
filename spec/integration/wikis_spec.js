@@ -93,5 +93,41 @@ describe("routes : wikis", () => {
       );
     });
   });
+
+  describe("GET /wikis/:id", () => {
+
+    it("should render a view with the selected wiki", (done) => {
+      request.get(`${base}${this.wiki.id}`, (err, res, body) => {
+        expect(err).toBeNull();
+        expect(body).toContain(sampleTestData.title);
+        done();
+      });
+    });
+
+  });
+
+  describe("POST /wikis/:id/destroy", () => {
+
+    it("should delete the wiki with the associated ID", (done) => {
+      Wiki.findAll()
+      .then((wikis) => {
+        const wikiCountBeforeDelete = wikis.length;
+
+        expect(wikiCountBeforeDelete).toBe(1);
+        request.post(`${base}${this.wiki.id}/destroy`, (err, res, body) => {
+          Wiki.findAll()
+          .then((wikis) => {
+            expect(err).toBeNull();
+            expect(wikis.length).toBe(wikiCountBeforeDelete - 1);
+            done();
+          })
+
+        });
+      });
+
+    });
+
+  });
+
 });
 
