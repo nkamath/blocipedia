@@ -9,7 +9,6 @@ describe("User", () => {
       done();
     })
     .catch((err) => {
-      console.log(err);
       done();
     });
 
@@ -28,7 +27,6 @@ describe("User", () => {
         done();
       })
       .catch((err) => {
-        console.log(err);
         done();
       });
     });
@@ -81,7 +79,6 @@ describe("User", () => {
         done();
       })
       .catch((err) => {
-        console.log(err);
         done();
       });
     });
