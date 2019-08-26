@@ -44,5 +44,24 @@ module.exports = {
     .catch((err) => {
       callback(err);
     })
+  },
+
+  updateWiki(id, updatedWiki, callback){
+    return Wiki.findByPk(id)
+    .then((wiki) => {
+      if(!wiki){
+        return callback("Wiki not found");
+      }
+
+      wiki.update(updatedWiki, {
+        fields: Object.keys(updatedWiki)
+      })
+      .then(() => {
+        callback(null, wiki);
+      })
+      .catch((err) => {
+        callback(err);
+      });
+    });
   }
 }
