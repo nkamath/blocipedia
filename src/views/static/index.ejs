@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <% include ./partials/head.ejs %>
-  </head>
-  <body>
+<head>
+  <% include ./partials/head.ejs %>
+</head>
 
-    <% include ./partials/navbar.ejs %>
+<body>
+
+  <% include ./partials/navbar.ejs %>
 
 
-      <!-- Page Content -->
-      <main class="container">
-        <% include ../static/partials/messages.ejs %>
+  <!-- Page Content -->
+  <main class="container">
+    <% include ../static/partials/messages.ejs %>
 
-        <!-- Jumbotron Header -->
-        <header class="jumbotron my-4">
-          <h1 class="display-3">Welcome to Blocipedia</h1>
-          <p class="lead">An application for users to share information.</p>
-          <a href="/users/sign-up" class="btn btn-primary btn-lg">Sign up</a>
-        </header>
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3"><%= title %></h1>
+      <p class="lead">An application for users to share information.</p>
+      <a href="/users/sign-up" class="btn btn-primary btn-lg">Sign up</a>
+    </header>
 
-        <!-- Page Features -->
-        <section class="row text-center">
+    <!-- Page Features -->
+    <section class="row text-center">
 
-          <section class="col-lg-6">
-            <h4 class="card-title">Free Plan</h4>
-            <p class="card-text">Create as many public wikis as you want!.</p>
-          </section>
+      <section class="col-lg-6">
+        <h4 class="card-title">Free Plan</h4>
+        <p class="card-text">Create as many public wikis as you want!.</p>
+      </section>
 
-          <section class="col-lg-6">
-            <h4 class="card-title">Premium Plan</h4>
-            <p class="card-text">Create private wikis!</p>
-          </section>
+      <section class="col-lg-6">
+        <h4 class="card-title">Premium Plan</h4>
+        <p class="card-text">Create private wikis!</p>
+        <a href="/premium" class="btn btn-primary btn-lg">Upgrade Now</a>
+      </section>
 
-        </section>
-        <!-- /.row -->
-      </main>
-      <!-- /.container -->
-      <% include ./partials/baseScripts.ejs %>
-    </body>
+    </section>
+    <!-- /.row -->
+  </main>
+  <!-- /.container -->
+  <% include ./partials/baseScripts.ejs %>
+</body>
 </html>

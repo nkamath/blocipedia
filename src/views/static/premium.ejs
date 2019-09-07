@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../static/partials/head.ejs %>
+</head>
+
+<body>
+  <% include ../static/partials/navbar.ejs %>
+  <main class="container">
+    <% include ../static/partials/messages.ejs %>
+    <% if(currentUser && currentUser.role == 0) { %>
+    <h3>Become a premium member for just $15!</h3>
+    <ul>
+      <li>Create private wikis!</li>
+      <li>Collaborate with other private members!</li>
+    </ul>
+    <form action="/premium/<%=currentUser.id%>/upgrade" method="POST">
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="<%= publishableKey %>" data-amount="1500" data-name="Blocipedia Upgrade" data-description="Blocipedia Premium Membership"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="auto">
+      </script>
+    </form>
+    <% } %>
+    <% if(currentUser && currentUser.role == 2) { %>
+    <h3>Are you sure you want to downgrade?</h3>
+    <h4>You will no longer be able to create private wikis.</h4>
+    <form action="/premium/<%=currentUser.id%>/downgrade" method="POST">
+      <button type="submit" class="btn btn-danger">Downgrade your account!</button>
+    </form>
+    <% } %>
+  </main>
+  <% include ../static/partials/baseScripts.ejs %>
+</body>
+</html>
