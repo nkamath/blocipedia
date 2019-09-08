@@ -3,7 +3,11 @@ module.exports = (sequelize, DataTypes) => {
   var Wiki = sequelize.define('Wiki', {
     title: DataTypes.STRING,
     body: DataTypes.STRING,
-    private: DataTypes.BOOLEAN, 
+    private: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }, 
     userId: {
       type: DataTypes.INTEGER,
       onDelete: "CASCADE",

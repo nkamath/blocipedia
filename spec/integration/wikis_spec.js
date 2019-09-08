@@ -61,7 +61,7 @@ describe("routes : wikis", () => {
           private: false
         })
         .then((wiki) => {
-          this.wiki = wiki; //store the topic
+          this.wiki = wiki; //store the wiki id
           done();
         })
     })
@@ -496,6 +496,54 @@ describe("routes : wikis", () => {
               })
               .then((wiki) => {
                 expect(wiki.title).toBe(sampleTestData.altTitle);
+                done();
+              });
+          });
+      });
+    });
+
+    describe("POST /wikis/:id/private", () => {
+      it("should make an owned public wiki private", (done) => {
+        const options = {
+          url: `${base}${this.wiki.id +1 }/update`,
+          form: {
+            private: true
+          }
+        };
+        request.post(options,
+          (err, res, body) => {
+
+            expect(err).toBeNull();
+            Wiki.findOne({
+                where: {
+                  title: sampleTestData.altTitle
+                }
+              })
+              .then((wiki) => {
+                expect(wiki.private).toBe(true);
+                done();
+              });
+          });
+      });
+
+      it("should not make someone else's public wiki private", (done) => {
+        const options = {
+          url: `${base}${this.wiki.id}/update`,
+          form: {
+            private: false
+          }
+        };
+        request.post(options,
+          (err, res, body) => {
+
+            expect(err).toBeNull();
+            Wiki.findOne({
+                where: {
+                  title: sampleTestData.title
+                }
+              })
+              .then((wiki) => {
+                expect(wiki.private).toBe(false);
                 done();
               });
           });

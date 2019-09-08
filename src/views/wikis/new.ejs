@@ -11,6 +11,17 @@
       <h1>New Wiki</h1>
 
       <form action="/wikis/new" method="post">
+        <% if(currentUser.role == 2 || currentUser.role == 1){ %>
+          <div class="form-group">
+            <label>Private</label>
+            <div>
+              <input type="radio" id="true" name="private" value="true">
+              <label for="true">True</label>
+              <input type="radio" id="false" name="private" value="false">
+              <label for="false">False</label>
+            </div>
+          </div>
+          <% } %>
         <div class="form-group">
           <label for="title">Wiki title</label>
           <input type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">

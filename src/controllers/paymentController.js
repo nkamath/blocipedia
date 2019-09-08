@@ -1,6 +1,7 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
 const userQueries = require("../db/queries.users.js");
+const wikiQueries = require("../db/queries.wikis.js");
 
 module.exports = {
   upgrade(req, res, next) {
@@ -30,6 +31,7 @@ module.exports = {
   }, 
   downgrade(req, res, next) {
     userQueries.downgrade(req.user.dataValues.id);
+    wikiQueries.makeWikisPublic(req.user.dataValues.id);
     req.flash("notice", "You are no longer a premium user!");
     res.redirect("/");
   }

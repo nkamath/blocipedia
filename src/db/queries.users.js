@@ -30,6 +30,7 @@ module.exports = {
         console.log(err);
       });
   },
+  
   downgrade(id) {
     return User.findByPk(id)
       .then(user => {

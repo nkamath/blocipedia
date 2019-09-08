@@ -26,6 +26,7 @@ module.exports = {
     return Wiki.create({
         title: newWiki.title,
         body: newWiki.body,
+        private: newWiki.private,
         userId: newWiki.userId
       })
       .then((wiki) => {
@@ -85,5 +86,19 @@ module.exports = {
         callback("Forbidden");
       }
     });
+  },
+
+  makeWikisPublic(userId) {
+    return Wiki.findAll({
+      where: {
+        userId: userId
+      }
+    })
+    .then((wikis) => {
+      wikis.forEach(wiki => {
+        wiki.update(
+          {private: false});
+      });
+    })
   }
 }
