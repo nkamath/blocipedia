@@ -32,7 +32,7 @@ describe("Wiki", () => {
                             userId: this.user.id
                         })
                         .then((wiki) => {
-                            this.wiki = wiki; //store the topic
+                            this.wiki = wiki; //store the wiki
                             done();
                         })
                 })
