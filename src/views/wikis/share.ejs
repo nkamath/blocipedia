@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+
+      <h1>Add collaborators</h1>
+      <form action="/wikis/<%= wiki.id %>/share" method="post">
+        <table style="width:50%">
+          <tr>
+            <th>Email</th>
+            <th>Share</th>
+          </tr>
+            <% users.forEach((user) => { %>
+              <tr>
+                <td><%= user.email %> </td>
+                <td><input type="checkbox" value="<%= user.id + "_share"%>" <% if(wikiCollaborators.includes(user.id)){ %> checked <% } %>></td>
+              </tr>
+            <% }) %>
+          
+        </table>
+        
+      </form>
+    </main>
+  </body>
+</html>

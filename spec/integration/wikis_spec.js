@@ -47,6 +47,7 @@ const sampleTestData = {
   altBody: "A compilation of thoughts from discussions on wikis."
 };
 
+
 describe("routes : wikis", () => {
   beforeEach((done) => {
     this.wiki;
@@ -65,6 +66,17 @@ describe("routes : wikis", () => {
           done();
         })
     })
+  });
+
+  describe("GET /wikis/share", () => {
+
+    it("should render a sharing view with a form", (done) => {
+      request.get(`${base}wikis/${this.wiki.id}/share`, (err, res, body) => {
+        expect(err).toBeNull();
+        expect(body).toContain("Add Collaborators");
+        done();
+      });
+    });
   });
 
   describe("admin user performing CRUD actions for Wiki", () => {

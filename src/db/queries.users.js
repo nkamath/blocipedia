@@ -43,5 +43,15 @@ module.exports = {
       .catch(err => {
         console.log(err);
       });
+  },
+
+  getAllUsers(callback) {
+    return User.findAll()
+      .then((users) => {
+        callback(null, users);
+      })
+      .catch((err) => {
+        callback(err);
+      })
   }
 }

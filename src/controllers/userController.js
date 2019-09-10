@@ -22,7 +22,6 @@ module.exports = {
       password: req.body.password,
       passwordConfirmation: req.body.passwordConfirmation
     };
-console.log("userController: Create called");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       req.flash("error", errors.array({
@@ -31,7 +30,6 @@ console.log("userController: Create called");
       return res.redirect(303, req.headers.referer)
     }
     userQueries.createUser(newUser, (err, user) => {
-      console.log("userController: createUser called");
       if (err) {
         req.flash("error", err);
         res.redirect("/users/sign-up");

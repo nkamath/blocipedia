@@ -1,7 +1,9 @@
-const wikiQueries = require("../db/queries.wikis.js");
 const Authorizer = require("../policies/application");
 const markdown = require( "markdown" ).markdown;
 
+const wikiQueries = require("../db/queries.wikis.js");
+const userQueries = require("../db/queries.users.js");
+const collaboratorQueries = require("../db/queries.collaborators.js");
 
 module.exports = {
     index(req, res, next) {
@@ -100,6 +102,25 @@ module.exports = {
                 res.redirect(`/wikis/${req.params.id}`);
             }
         });
-    }
+    }, 
 
+    share(req, res, next) {
+        wikiQueries.getWiki(req.params.id, (err, wiki) => {
+            if (err || wiki == null) {  
+                res.redirect(404, "/wikis");
+            } else {
+                userQueries.getAllUsers((err,users) => {
+                    collaboratorQueries.getCollaboratorsForWiki(wiki.id,(err,collaborators) =>{
+                        let wikiCollaborators = [];
+                        collaborators.forEach(collaborator => {
+                            wikiCollaborators.push(collaborator.userId);
+                        });
+                        res.render(`wikis/share`, {
+                            wiki, users, wikiCollaborators
+                        });
+                    })  
+                });  
+            }
+        });
+    }
 }
