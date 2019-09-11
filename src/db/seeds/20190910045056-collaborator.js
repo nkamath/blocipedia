@@ -1,23 +1,16 @@
 'use strict';
+const faker = require("faker");
 
 let collaborators = [];
-collaborators.push({
-  userId: 1,
-  wikiId: 3,
-  createdAt: new Date(),
-  updatedAt: new Date()
-},{
-  userId: 5,
-  wikiId: 3,
-  createdAt: new Date(),
-  updatedAt: new Date()
-},{
-  userId: 3,
-  wikiId: 3,
-  createdAt: new Date(),
-  updatedAt: new Date()
+
+for(let i = 1 ; i <= 200 ; i++){
+  collaborators.push({
+    userId: 1+faker.random.number(14),
+    wikiId: 1+faker.random.number(14),
+    createdAt: new Date(),
+    updatedAt: new Date()
+  });
 }
-);
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

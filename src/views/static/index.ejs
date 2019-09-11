@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <% include ./partials/head.ejs %>
 </head>
@@ -17,7 +18,9 @@
     <header class="jumbotron my-4">
       <h1 class="display-3"><%= title %></h1>
       <p class="lead">An application for users to share information.</p>
+      <% if(!currentUser){ %>
       <a href="/users/sign-up" class="btn btn-primary btn-lg">Sign up</a>
+      <% } %>
     </header>
 
     <!-- Page Features -->
@@ -31,7 +34,9 @@
       <section class="col-lg-6">
         <h4 class="card-title">Premium Plan</h4>
         <p class="card-text">Create private wikis!</p>
-        <a href="/premium" class="btn btn-primary btn-lg">Upgrade Now</a>
+        <% if(currentUser.role !== 2){ %>
+        <a href="/premium" class="btn btn-primary btn-lg"> Upgrade Now </a>
+        <% } %>
       </section>
 
     </section>
@@ -40,4 +45,5 @@
   <!-- /.container -->
   <% include ./partials/baseScripts.ejs %>
 </body>
+
 </html>
