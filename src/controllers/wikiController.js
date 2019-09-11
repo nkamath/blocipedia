@@ -11,9 +11,19 @@ module.exports = {
             if (err) {
                 res.redirect(500, "static/index");
             } else {
-                res.render("wikis/index", {
-                    wikis
-                });
+                collaboratorQueries.getCollaborationsForUser(req.user,(err, collaborations) => {
+                    let wikiCollaborations = [];
+                    collaborations.forEach(collaboration => {
+                        wikiCollaborations.push(collaboration.wikiId);
+                    });
+                    if (err) {
+                        res.redirect(500, "static/index");  
+                    } else {
+                        res.render("wikis/index", {
+                            wikis, wikiCollaborations
+                        });
+                    }
+                });          
             }
         })
     },
@@ -120,6 +130,15 @@ module.exports = {
                         });
                     })  
                 });  
+            }
+        });
+    },
+    updateShare(req, res, next) {
+        collaboratorQueries.updateCollaborators(req, (err, wiki) => {
+            if (err || wiki == null) {
+                res.redirect(404, `/wikis/${req.params.id}/share`);
+            } else {
+                res.redirect(`/wikis/${req.params.id}`);
             }
         });
     }

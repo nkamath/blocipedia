@@ -34,7 +34,7 @@
       <section class="col-lg-6">
         <h4 class="card-title">Premium Plan</h4>
         <p class="card-text">Create private wikis!</p>
-        <% if(currentUser.role !== 2){ %>
+        <% if(currentUser?currentUser.role !== 2:false){ %>
         <a href="/premium" class="btn btn-primary btn-lg"> Upgrade Now </a>
         <% } %>
       </section>

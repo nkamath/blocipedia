@@ -14,6 +14,6 @@ router.post("/wikis/:id/destroy", wikiController.destroy);
 router.post("/wikis/:id/update", wikiController.update);
 
 router.get("/wikis/:id/share", wikiController.share);
-//router.post("/wikis/:id/share", wikiController.updateShare);
+router.post("/wikis/:id/share", wikiController.updateShare);
 
 module.exports = router;

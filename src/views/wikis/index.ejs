@@ -15,7 +15,7 @@
 
       <ul class="list-group">
         <% wikis.forEach((wiki) => { %>
-          <% if((!wiki.private) || (currentUser?(currentUser.role === 1) || (currentUser.id  === wiki.userId):false)){ %>
+          <% if((!wiki.private) || (currentUser?(currentUser.role === 1) || (currentUser.id  === wiki.userId)|| wikiCollaborations.includes(wiki.id):false)){  %>
           <li class="list-group-item">
             <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
           </li>
